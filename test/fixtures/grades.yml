@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grade: 9.99
+  assignment_name: MyString
+  student_id: 1
+
+two:
+  grade: 9.99
+  assignment_name: MyString
+  student_id: 1
