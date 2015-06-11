@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 
   def index
-    @teachers = Teacher.find_by_id(session[:teacher_id])
+    @teacher = Teacher.find_by_id(session[:teacher_id])
     @students = Student.where(teacher_id: session[:teacher_id])
   end
 
@@ -48,7 +48,7 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:name, :email, :password_digest, :teacher_id, :password_confirmation)
+      params.require(:teacher).permit(:name, :email, :password, :teacher_id, :password_confirmation)
     end
 
     def logged_in?

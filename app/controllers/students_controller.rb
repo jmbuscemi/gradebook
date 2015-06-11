@@ -1,11 +1,23 @@
 class StudentsController < ApplicationController
-  before_action :logged_in?
+  before_action :logged_in?, except: [:new, :create]
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def new
+    if session[:teacher_id]
+      @student = Student.new
+    else
+      flash.now[:alert] = "You can't access this page"
+    end
   end
 
   def create
+    @student = Student.new(student_params)
+    @student.teacher_id = session[:teacher_id]
+    if @student.save
+      redirect_to teachers_path, notice: 'Student was successfully created.'
+    else
+      render :new
+    end
   end
 
   def index
@@ -19,8 +31,8 @@ class StudentsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def parent_params
-      params.require(:student).permit(:name, :email, :password_digest, :teacher_id, :password_confirmation)
+    def student_params
+      params.require(:student).permit(:name, :email, :password, :teacher_id, :password_confirmation)
     end
 
     def logged_in?

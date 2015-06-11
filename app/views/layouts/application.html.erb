@@ -10,6 +10,9 @@
   <%= link_to 'Logout', logout_path if session[:teacher_id] %>
   <%= link_to 'Logout', logout_path if session[:student_id] %>
   <%= link_to 'Logout', logout_path if session[:parent_id] %>
+  <% if session[:user_type] != nil %>
+    <h2> <%= session[:user_type].capitalize %> Page </h2>
+  <% end %>
 
   <%= yield %>
 

@@ -1,4 +1,4 @@
-<h2> <%= session[:user_type].capitalize %> Page: Logged in as <%= @teachers.name %> </h2>
+<h2> You are logged in as <%= @teacher.name %> </h2>
 <p id="notice"><%= notice %></p>
 
 <h1>Student List</h1>
@@ -16,18 +16,35 @@
 
   <tbody>
     <% @students.each do |student| %>
-      <% student.grades.each do |g| %>
+      <% if student.grades.count == 0 %>
         <tr>
           <td><%= student.name %></td>
           <td><%= student.email %></td>
-          <% if student.parents.count == 1 %>
+          <% if student.parents.count == 0 %>
+            <td>N/A</td>
+          <% elsif student.parents.count == 1 %>
             <td><%= student.parents.first.name %></td>
           <% else %>
             <td><%= student.parents.first.name %> and <%= student.parents.last.name %></td>
           <% end %>
-          <td><%= g.grade %> on <%= g.assignment_name%></td>
+          <td>No grades yet.</td>
           <td><%= link_to 'Edit', edit_grade_path(student) %></td>
-        </tr>
+      <% else %>
+        <% student.grades.each do |g| %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.email %></td>
+            <% if student.parents.count == 0 %>
+              <td>N/A</td>
+            <% elsif student.parents.count == 1 %>
+              <td><%= student.parents.first.name %></td>
+            <% else %>
+              <td><%= student.parents.first.name %> and <%= student.parents.last.name %></td>
+            <% end %>
+            <td><%= g.grade %> on <%= g.assignment_name%></td>
+            <td><%= link_to 'Edit', edit_grade_path(student) %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>
@@ -36,4 +53,3 @@
 <br>
 
 <%= link_to 'New Student', new_student_path %>
-<%= link_to 'New Parent', new_parent_path %>

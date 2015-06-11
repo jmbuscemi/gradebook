@@ -5,4 +5,7 @@ class Student < ActiveRecord::Base
   belongs_to :teacher
   has_many :grades
 
+  validates :name, presence: true
+  validates :email, presence: true
+
 end
