@@ -13,15 +13,11 @@
 
   <div class="field">
     <%= f.label :grade %><br>
-    <%= f.text_field :grade %>
+    <%= f.number_field :grade, :step => 'any'%>
   </div>
   <div class="field">
     <%= f.label :assignment_name %><br>
     <%= f.text_field :assignment_name %>
-  </div>
-  <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.number_field :student_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

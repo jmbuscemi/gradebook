@@ -1,6 +1,7 @@
+<h2> <%= session[:user_type].capitalize %> Page: Logged in as <%= @teachers.name %> </h2>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Students</h1>
+<h1>Student List</h1>
 
 <table>
   <thead>
@@ -15,17 +16,19 @@
 
   <tbody>
     <% @students.each do |student| %>
-      <tr>
-        <td><%= student.name %></td>
-        <td><%= student.email %></td>
-        <% if student.parents.count == 1 %>
-          <td><%= student.parents.first.name %></td>
-        <% else %>
-          <td><%= student.parents.first.name %> and <%= student.parents.last.name %></td>
-        <% end %>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% student.grades.each do |g| %>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.email %></td>
+          <% if student.parents.count == 1 %>
+            <td><%= student.parents.first.name %></td>
+          <% else %>
+            <td><%= student.parents.first.name %> and <%= student.parents.last.name %></td>
+          <% end %>
+          <td><%= g.grade %> on <%= g.assignment_name%></td>
+          <td><%= link_to 'Edit', edit_grade_path(student) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
