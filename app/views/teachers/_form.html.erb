@@ -21,8 +21,16 @@
   </div>
   <div class="field">
     <%= f.label :password_digest %><br>
-    <%= f.text_field :password_digest %>
+    <%= f.text_field :password %>
   </div>
+
+  <h3>Students</h3>
+  <%= f.fields_for(:students) do |ff| %>
+    <div class="field">
+      <%= ff.label :name %><br>
+      <%= ff.text_field :name %>
+    </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

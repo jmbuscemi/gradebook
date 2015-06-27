@@ -20,6 +20,19 @@ class SessionsController < ApplicationController
         flash.now[:notice] = "Invalid username/password"
       end
     end
+
+    #     #Code below needs to have :user_id replace :teacher_id/:student_id/:parent_id in rest of code
+    #     #This code needs to have a drop down to select your user_type
+    #     user_class = params[:user_type].capitalize.contantize
+    #     user = user_class.find_by_email(params[:email])
+    #     if user && user.authenticate(params[:password])
+    #       session[:user_id] = user.id
+    #       session[:user_type] = params[:user_type]
+    #       redirect_to send("#{params[:role]}s_path"), notice: "Login Successul!"
+    #     else
+    #       flash.now[:notice] = "Invalid username/password"
+    #     end
+    #   end
   end
 
   def logout
